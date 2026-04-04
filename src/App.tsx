@@ -1,7 +1,8 @@
 import { useState } from 'react'
 import { supabase } from './supabase'
 import Dashboard from './Dashboard'
-import Messagerie from './Messagerie'
+
+type Page = 'accueil' | 'inscription' | 'connexion'
 type Profil = 'proprietaire' | 'conciergerie' | null
 
 const INPUT: React.CSSProperties = {
@@ -78,15 +79,6 @@ export default function App() {
     setDashboard(role)
   }
 
-  async function deconnecter() {
-    await supabase.auth.signOut()
-    setDashboard(null)
-    setEmail('')
-    setPassword('')
-    setMessage('')
-    setPage('accueil')
-  }
-
   if (dashboard === 'proprietaire') return <Dashboard />
 
   if (dashboard === 'conciergerie') return (
@@ -95,7 +87,7 @@ export default function App() {
         <div style={{ fontSize: 48, marginBottom: 16 }}>🤝</div>
         <h1 style={{ fontFamily: 'Georgia', fontSize: 28, color: '#1A1410', marginBottom: 8 }}>Dashboard Conciergerie</h1>
         <p style={{ color: '#8C7E72', marginBottom: 32 }}>Bienvenue sur Conciergea</p>
-        <button onClick={deconnecter} style={{ background: '#4A7C59', color: 'white', border: 'none', borderRadius: 50, padding: '12px 32px', fontSize: 14, fontWeight: 700, cursor: 'pointer' }}>
+        <button onClick={async () => { await supabase.auth.signOut(); setDashboard(null) }} style={{ background: '#4A7C59', color: 'white', border: 'none', borderRadius: 50, padding: '12px 32px', fontSize: 14, fontWeight: 700, cursor: 'pointer' }}>
           Se deconnecter
         </button>
       </div>
