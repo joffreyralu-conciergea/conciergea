@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { supabase } from './supabase'
 import Dashboard from './Dashboard'
+import DashboardConciergerie from './DashboardConciergerie'
 
 type Page = 'accueil' | 'inscription' | 'connexion'
 type Profil = 'proprietaire' | 'conciergerie' | null
@@ -80,19 +81,7 @@ export default function App() {
   }
 
   if (dashboard === 'proprietaire') return <Dashboard />
-
-  if (dashboard === 'conciergerie') return (
-    <div style={{ minHeight: '100vh', background: '#1A1410', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-      <div style={{ background: '#FDFAF4', borderRadius: 24, padding: 48, textAlign: 'center', maxWidth: 400, width: '100%' }}>
-        <div style={{ fontSize: 48, marginBottom: 16 }}>🤝</div>
-        <h1 style={{ fontFamily: 'Georgia', fontSize: 28, color: '#1A1410', marginBottom: 8 }}>Dashboard Conciergerie</h1>
-        <p style={{ color: '#8C7E72', marginBottom: 32 }}>Bienvenue sur Conciergea</p>
-        <button onClick={async () => { await supabase.auth.signOut(); setDashboard(null) }} style={{ background: '#4A7C59', color: 'white', border: 'none', borderRadius: 50, padding: '12px 32px', fontSize: 14, fontWeight: 700, cursor: 'pointer' }}>
-          Se deconnecter
-        </button>
-      </div>
-    </div>
-  )
+  if (dashboard === 'conciergerie') return <DashboardConciergerie />
 
   if (page === 'accueil') return (
     <div style={{ minHeight: '100vh', background: '#1A1410', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: 24 }}>
