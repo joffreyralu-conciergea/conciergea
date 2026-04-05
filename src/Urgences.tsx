@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import {
-  ArrowLeft, Wrench, Key, Droplets, User,
-  Shield, CheckCircle, Clock, Phone, MessageSquare
+  ArrowLeft, Key, Droplets, User,
+  Shield, CheckCircle, Phone
 } from 'lucide-react'
 
 const font = 'Inter, sans-serif'
