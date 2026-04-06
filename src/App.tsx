@@ -97,12 +97,12 @@ export default function App() {
 
   if (page === 'accueil') return (
     <div style={{ minHeight: '100vh', background: '#0A0A0B', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: 24, position: 'relative', overflow: 'hidden' }}>
-      <link href="https://fonts.googleapis.com/css2?family=Italiana&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+      <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@700;900&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
       <div style={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -60%)', width: 600, height: 400, background: 'radial-gradient(ellipse, rgba(201,169,110,0.06) 0%, transparent 70%)', pointerEvents: 'none' }} />
 
       <div style={{ maxWidth: 440, width: '100%', textAlign: 'center', position: 'relative' }}>
 
-        <h1 style={{ fontFamily: 'Italiana, serif', fontSize: 100, color: '#F5F0E8', marginBottom: 0, fontWeight: 400, lineHeight: 0.9, letterSpacing: 2 }}>
+        <h1 style={{ fontFamily: 'Outfit, sans-serif', fontSize: 96, color: '#F5F0E8', marginBottom: 0, fontWeight: 900, lineHeight: 0.9, letterSpacing: -4 }}>
           Ke<span style={{ color: or }}>ia</span>
         </h1>
 
@@ -152,7 +152,7 @@ export default function App() {
         <button onClick={() => setPage('accueil')} style={{ background: 'none', border: 'none', color: '#6B6570', cursor: 'pointer', marginBottom: 28, fontSize: 14, fontFamily: font, display: 'flex', alignItems: 'center', gap: 6 }}>
           ← Retour
         </button>
-        <h2 style={{ fontFamily: 'Italiana, serif', fontSize: 52, color: '#F5F0E8', marginBottom: 6, fontWeight: 400, letterSpacing: 1 }}>Créer mon compte</h2>
+        <h2 style={{ fontFamily: 'Outfit, sans-serif', fontSize: 52, color: '#F5F0E8', marginBottom: 6, fontWeight: 900, letterSpacing: -2 }}>Créer mon compte</h2>
         <p style={{ color: '#6B6570', marginBottom: 32, fontSize: 14, fontFamily: font }}>
           Profil : <strong style={{ color: or }}>{profil === 'proprietaire' ? 'Propriétaire' : 'Conciergerie'}</strong>
         </p>
@@ -182,7 +182,7 @@ export default function App() {
           ← Retour
         </button>
         <div style={{ textAlign: 'center', marginBottom: 36 }}>
-          <h2 style={{ fontFamily: 'Italiana, serif', fontSize: 72, color: '#F5F0E8', marginBottom: 8, fontWeight: 400, letterSpacing: 2 }}>
+          <h2 style={{ fontFamily: 'Outfit, sans-serif', fontSize: 72, color: '#F5F0E8', marginBottom: 8, fontWeight: 900, letterSpacing: -3 }}>
             Ke<span style={{ color: or }}>ia</span>
           </h2>
           <p style={{ color: '#6B6570', fontSize: 11, fontFamily: font, letterSpacing: 3, textTransform: 'uppercase' as const }}>Bon retour</p>
