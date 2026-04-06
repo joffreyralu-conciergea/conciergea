@@ -2,29 +2,32 @@ import { useState } from 'react'
 import { supabase } from './supabase'
 import Dashboard from './Dashboard'
 import DashboardConciergerie from './DashboardConciergerie'
-import { Home, Handshake, Key, ArrowRight, Eye, EyeOff } from 'lucide-react'
+import { Home, Handshake, ArrowRight, Eye, EyeOff } from 'lucide-react'
 
 type Page = 'accueil' | 'inscription' | 'connexion'
 type Profil = 'proprietaire' | 'conciergerie' | null
 
+const font = 'DM Sans, sans-serif'
+const serif = 'Cormorant Garamond, Georgia, serif'
+
 const INPUT: React.CSSProperties = {
   width: '100%',
-  background: '#2C2218',
-  border: '1px solid #3E3028',
-  borderRadius: 12,
+  background: '#16161A',
+  border: '1px solid rgba(201,169,110,0.15)',
+  borderRadius: 14,
   padding: '14px 16px',
-  color: 'white',
+  color: '#F5F0E8',
   fontSize: 14,
   marginBottom: 12,
   boxSizing: 'border-box',
   outline: 'none',
-  fontFamily: 'Inter, sans-serif',
+  fontFamily: font,
 }
 
 const BTN1: React.CSSProperties = {
   width: '100%',
-  background: '#C4714A',
-  color: 'white',
+  background: '#C9A96E',
+  color: '#0A0A0B',
   border: 'none',
   borderRadius: 50,
   padding: '16px',
@@ -32,7 +35,7 @@ const BTN1: React.CSSProperties = {
   fontWeight: 600,
   cursor: 'pointer',
   marginBottom: 12,
-  fontFamily: 'Inter, sans-serif',
+  fontFamily: font,
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'center',
@@ -42,13 +45,13 @@ const BTN1: React.CSSProperties = {
 const BTN2: React.CSSProperties = {
   width: '100%',
   background: 'transparent',
-  color: '#8C7E72',
-  border: '1px solid #3E3028',
+  color: '#6B6570',
+  border: '1px solid rgba(201,169,110,0.15)',
   borderRadius: 50,
   padding: '14px',
   fontSize: 14,
   cursor: 'pointer',
-  fontFamily: 'Inter, sans-serif',
+  fontFamily: font,
 }
 
 export default function App() {
@@ -69,8 +72,7 @@ export default function App() {
     if (!prenom || !nom || !email || !password) return setMessage('Remplissez tous les champs')
     setLoading(true)
     const { error } = await supabase.auth.signUp({
-      email,
-      password,
+      email, password,
       options: { data: { role: profil, prenom, nom, telephone } }
     })
     setLoading(false)
@@ -93,42 +95,44 @@ export default function App() {
   if (dashboard === 'conciergerie') return <DashboardConciergerie />
 
   if (page === 'accueil') return (
-    <div style={{ minHeight: '100vh', background: '#1A1410', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: 24 }}>
-      <div style={{ maxWidth: 440, width: '100%', textAlign: 'center' }}>
+    <div style={{ minHeight: '100vh', background: '#0A0A0B', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: 24, position: 'relative', overflow: 'hidden' }}>
+      <div style={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -60%)', width: 600, height: 400, background: 'radial-gradient(ellipse, rgba(201,169,110,0.06) 0%, transparent 70%)', pointerEvents: 'none' }} />
+      <div style={{ maxWidth: 440, width: '100%', textAlign: 'center', position: 'relative' }}>
 
-        <div style={{ width: 72, height: 72, background: '#C4714A', borderRadius: 22, display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 24px' }}>
-          <Key size={32} color="white" />
+        <div style={{ display: 'inline-block', border: '1px solid rgba(201,169,110,0.2)', borderRadius: 100, padding: '6px 18px', marginBottom: 32 }}>
+          <span style={{ fontSize: 10, color: '#C9A96E', letterSpacing: 4, textTransform: 'uppercase' as const, fontFamily: font, fontWeight: 500 }}>Plateforme de conciergerie</span>
         </div>
 
-        <h1 style={{ fontFamily: 'Playfair Display, Georgia, serif', fontSize: 52, color: 'white', marginBottom: 20, fontWeight: 700, lineHeight: 1.1 }}>
-          Concier<em style={{ color: '#D4876A' }}>gea</em>
+        <h1 style={{ fontFamily: serif, fontSize: 88, color: '#F5F0E8', marginBottom: 0, fontWeight: 300, lineHeight: 0.9, letterSpacing: -2 }}>
+          Ke<em style={{ color: '#C9A96E', fontStyle: 'italic' }}>ia</em>
         </h1>
 
-        <p style={{ color: '#6B6059', fontSize: 11, marginBottom: 48, fontFamily: 'Inter, sans-serif', letterSpacing: 3, textTransform: 'uppercase' as const, fontWeight: 500 }}>
-          Digitalisez votre gestion locative
+        <p style={{ color: '#6B6570', fontSize: 11, marginBottom: 48, fontFamily: font, letterSpacing: 3, textTransform: 'uppercase' as const, fontWeight: 400, marginTop: 20 }}>
+          L'excellence en gestion locative
         </p>
 
-        <p style={{ color: '#B8ACA2', marginBottom: 16, fontSize: 12, fontFamily: 'Inter, sans-serif', fontWeight: 500, letterSpacing: 2, textTransform: 'uppercase' as const }}>
+        <p style={{ color: '#6B6570', marginBottom: 16, fontSize: 11, fontFamily: font, fontWeight: 500, letterSpacing: 3, textTransform: 'uppercase' as const }}>
           Je suis
         </p>
 
         <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 12, marginBottom: 32 }}>
           {[
-            { id: 'proprietaire', icon: <Home size={26} />, label: 'Propriétaire', sub: 'Je loue des biens' },
-            { id: 'conciergerie', icon: <Handshake size={26} />, label: 'Conciergerie', sub: 'Je gère des biens' },
+            { id: 'proprietaire', icon: <Home size={24} />, label: 'Propriétaire', sub: 'Je loue des biens' },
+            { id: 'conciergerie', icon: <Handshake size={24} />, label: 'Conciergerie', sub: 'Je gère des biens' },
           ].map(p => (
             <button key={p.id} onClick={() => setProfil(p.id as Profil)} style={{
-              padding: '22px 16px',
-              borderRadius: 18,
-              border: profil === p.id ? '2px solid #C4714A' : '2px solid #3E3028',
-              background: profil === p.id ? '#FBF0EA' : '#2C2218',
+              padding: '24px 16px',
+              borderRadius: 20,
+              border: profil === p.id ? '1px solid #C9A96E' : '1px solid rgba(201,169,110,0.15)',
+              background: profil === p.id ? 'rgba(201,169,110,0.08)' : '#16161A',
               cursor: 'pointer',
+              transition: 'all 0.2s',
             }}>
-              <div style={{ color: profil === p.id ? '#C4714A' : '#6B6059', marginBottom: 12, display: 'flex', justifyContent: 'center' }}>
+              <div style={{ color: profil === p.id ? '#C9A96E' : '#6B6570', marginBottom: 12, display: 'flex', justifyContent: 'center' }}>
                 {p.icon}
               </div>
-              <div style={{ fontSize: 14, fontWeight: 600, color: profil === p.id ? '#C4714A' : 'white', fontFamily: 'Inter, sans-serif', marginBottom: 4 }}>{p.label}</div>
-              <div style={{ fontSize: 12, color: '#6B6059', fontFamily: 'Inter, sans-serif' }}>{p.sub}</div>
+              <div style={{ fontSize: 14, fontWeight: 500, color: profil === p.id ? '#F5F0E8' : '#6B6570', fontFamily: font, marginBottom: 4 }}>{p.label}</div>
+              <div style={{ fontSize: 11, color: '#6B6570', fontFamily: font }}>{p.sub}</div>
             </button>
           ))}
         </div>
@@ -139,20 +143,20 @@ export default function App() {
         <button onClick={() => { setMessage(''); setPage('connexion') }} style={BTN2}>
           J'ai déjà un compte
         </button>
-        {message && <p style={{ color: '#C4714A', marginTop: 16, fontSize: 13, fontFamily: 'Inter, sans-serif' }}>{message}</p>}
+        {message && <p style={{ color: '#C9A96E', marginTop: 16, fontSize: 13, fontFamily: font }}>{message}</p>}
       </div>
     </div>
   )
 
   if (page === 'inscription') return (
-    <div style={{ minHeight: '100vh', background: '#1A1410', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: 24 }}>
+    <div style={{ minHeight: '100vh', background: '#0A0A0B', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: 24 }}>
       <div style={{ maxWidth: 420, width: '100%' }}>
-        <button onClick={() => setPage('accueil')} style={{ background: 'none', border: 'none', color: '#8C7E72', cursor: 'pointer', marginBottom: 28, fontSize: 14, fontFamily: 'Inter, sans-serif', display: 'flex', alignItems: 'center', gap: 6 }}>
+        <button onClick={() => setPage('accueil')} style={{ background: 'none', border: 'none', color: '#6B6570', cursor: 'pointer', marginBottom: 28, fontSize: 14, fontFamily: font, display: 'flex', alignItems: 'center', gap: 6 }}>
           ← Retour
         </button>
-        <h2 style={{ fontFamily: 'Playfair Display, Georgia, serif', fontSize: 34, color: 'white', marginBottom: 6, fontWeight: 700 }}>Créer mon compte</h2>
-        <p style={{ color: '#8C7E72', marginBottom: 32, fontSize: 14, fontFamily: 'Inter, sans-serif' }}>
-          Profil : <strong style={{ color: '#C4714A' }}>{profil === 'proprietaire' ? 'Propriétaire' : 'Conciergerie'}</strong>
+        <h2 style={{ fontFamily: serif, fontSize: 42, color: '#F5F0E8', marginBottom: 6, fontWeight: 300, letterSpacing: -1 }}>Créer mon compte</h2>
+        <p style={{ color: '#6B6570', marginBottom: 32, fontSize: 14, fontFamily: font }}>
+          Profil : <strong style={{ color: '#C9A96E' }}>{profil === 'proprietaire' ? 'Propriétaire' : 'Conciergerie'}</strong>
         </p>
         <input value={prenom} onChange={e => setPrenom(e.target.value)} placeholder="Prénom" style={INPUT} />
         <input value={nom} onChange={e => setNom(e.target.value)} placeholder="Nom" style={INPUT} />
@@ -161,36 +165,33 @@ export default function App() {
         <div style={{ position: 'relative', marginBottom: 12 }}>
           <input value={password} onChange={e => setPassword(e.target.value)} placeholder="Mot de passe" type={showPassword ? 'text' : 'password'}
             style={{ ...INPUT, marginBottom: 0, paddingRight: 48 }} />
-          <button onClick={() => setShowPassword(!showPassword)} style={{ position: 'absolute', right: 14, top: '50%', transform: 'translateY(-50%)', background: 'none', border: 'none', cursor: 'pointer', color: '#8C7E72' }}>
+          <button onClick={() => setShowPassword(!showPassword)} style={{ position: 'absolute', right: 14, top: '50%', transform: 'translateY(-50%)', background: 'none', border: 'none', cursor: 'pointer', color: '#6B6570' }}>
             {showPassword ? <EyeOff size={18} /> : <Eye size={18} />}
           </button>
         </div>
         <button onClick={inscrire} disabled={loading} style={{ ...BTN1, marginTop: 8, opacity: loading ? 0.7 : 1 }}>
           {loading ? 'Création...' : <><span>Créer mon compte</span><ArrowRight size={16} /></>}
         </button>
-        {message && <p style={{ color: '#4A7C59', marginTop: 16, fontSize: 13, fontFamily: 'Inter, sans-serif' }}>{message}</p>}
+        {message && <p style={{ color: '#7A9E7E', marginTop: 16, fontSize: 13, fontFamily: font }}>{message}</p>}
       </div>
     </div>
   )
 
   return (
-    <div style={{ minHeight: '100vh', background: '#1A1410', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: 24 }}>
+    <div style={{ minHeight: '100vh', background: '#0A0A0B', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: 24 }}>
       <div style={{ maxWidth: 420, width: '100%' }}>
-        <button onClick={() => setPage('accueil')} style={{ background: 'none', border: 'none', color: '#8C7E72', cursor: 'pointer', marginBottom: 28, fontSize: 14, fontFamily: 'Inter, sans-serif' }}>
+        <button onClick={() => setPage('accueil')} style={{ background: 'none', border: 'none', color: '#6B6570', cursor: 'pointer', marginBottom: 28, fontSize: 14, fontFamily: font }}>
           ← Retour
         </button>
         <div style={{ textAlign: 'center', marginBottom: 36 }}>
-          <div style={{ width: 60, height: 60, background: '#C4714A', borderRadius: 20, display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 18px' }}>
-            <Key size={28} color="white" />
-          </div>
-          <h2 style={{ fontFamily: 'Playfair Display, Georgia, serif', fontSize: 34, color: 'white', marginBottom: 8, fontWeight: 700 }}>Connexion</h2>
-          <p style={{ color: '#6B6059', fontSize: 14, fontFamily: 'Inter, sans-serif' }}>Bon retour sur Conciergea</p>
+          <h2 style={{ fontFamily: serif, fontSize: 52, color: '#F5F0E8', marginBottom: 8, fontWeight: 300, letterSpacing: -1 }}>Ke<em style={{ color: '#C9A96E' }}>ia</em></h2>
+          <p style={{ color: '#6B6570', fontSize: 13, fontFamily: font, letterSpacing: 2, textTransform: 'uppercase' as const }}>Bon retour</p>
         </div>
         <input value={email} onChange={e => setEmail(e.target.value)} placeholder="Email" type="email" style={INPUT} />
         <div style={{ position: 'relative', marginBottom: 20 }}>
           <input value={password} onChange={e => setPassword(e.target.value)} placeholder="Mot de passe" type={showPassword ? 'text' : 'password'}
             style={{ ...INPUT, marginBottom: 0, paddingRight: 48 }} />
-          <button onClick={() => setShowPassword(!showPassword)} style={{ position: 'absolute', right: 14, top: '50%', transform: 'translateY(-50%)', background: 'none', border: 'none', cursor: 'pointer', color: '#8C7E72' }}>
+          <button onClick={() => setShowPassword(!showPassword)} style={{ position: 'absolute', right: 14, top: '50%', transform: 'translateY(-50%)', background: 'none', border: 'none', cursor: 'pointer', color: '#6B6570' }}>
             {showPassword ? <EyeOff size={18} /> : <Eye size={18} />}
           </button>
         </div>
@@ -198,7 +199,7 @@ export default function App() {
           {loading ? 'Connexion...' : <><span>Se connecter</span><ArrowRight size={16} /></>}
         </button>
         <button onClick={() => setPage('inscription')} style={BTN2}>Créer un compte</button>
-        {message && <p style={{ color: '#C4714A', marginTop: 16, fontSize: 13, textAlign: 'center', fontFamily: 'Inter, sans-serif' }}>{message}</p>}
+        {message && <p style={{ color: '#C9A96E', marginTop: 16, fontSize: 13, textAlign: 'center', fontFamily: font }}>{message}</p>}
       </div>
     </div>
   )
